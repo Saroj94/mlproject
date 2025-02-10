@@ -1,5 +1,5 @@
 import sys
-import logging
+from src.logger import logging
 
 ##i customize the error message to show the error message and the line number where the error occured
 def error_message_details(error, error_detail:sys):
@@ -21,4 +21,4 @@ class CustomException(Exception):
     def __str__(self):
         return self.error_message ##return the error message when we raise the exception
         
-    
+
