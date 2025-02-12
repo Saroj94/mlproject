@@ -4,13 +4,17 @@ from src.exception import CustomException
 from src.logger import logging
 import pandas as pd
 
+
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+
+##to test
+from src.components.data_transformation import DataTransformation,DataTransformationConfig
 
 ##class that saves the input data and pass it to the next step wherever it is require
 ##this decorator is used to create a class with attributes and methods, we can directly define the variable
 @dataclass 
-class DataIngestionConfig: 
+class DataIngestionConfig: ##it is just like providing the input thing that is required for dataingestion component
     ##data path where the data is stored
     train_data_path: str=os.path.join('artifact','train.csv')
     test_data_path: str=os.path.join('artifact','test.csv')
@@ -53,4 +57,7 @@ class DataIngestion:
 
 if __name__=="__main__":
     obj=DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data,test_data=obj.initiate_data_ingestion()
+
+    data_transform=DataTransformation()
+    data_transform.initiate_data_transformation(train_data,test_data)
