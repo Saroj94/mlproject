@@ -7,9 +7,9 @@ import pandas as pd
 
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
-
 ##to test
 from src.components.data_transformation import DataTransformation,DataTransformationConfig
+from src.components.model_trainer import Modeltrainer,ModelTrainerConfig
 
 ##class that saves the input data and pass it to the next step wherever it is require
 ##this decorator is used to create a class with attributes and methods, we can directly define the variable
@@ -59,5 +59,10 @@ if __name__=="__main__":
     obj=DataIngestion()
     train_data,test_data=obj.initiate_data_ingestion()
 
-    data_transform=DataTransformation()
-    data_transform.initiate_data_transformation(train_data,test_data)
+    data_transformation=DataTransformation()
+    train_arr,tets_arr,_=data_transformation.initiate_data_transformation(train_data,test_data)
+
+
+    ##model training
+    modeltrainer=Modeltrainer()
+    print(modeltrainer.initiate_model_trainer(train_arr,tets_arr))
