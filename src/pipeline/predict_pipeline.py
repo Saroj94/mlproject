@@ -29,13 +29,7 @@ class PredictionPipeline:
             
             # Debugging: Print features before transformation
             print("Features before transformation:", features)
-            
-            """# Ensure features is not None
-            if features is None:
-                raise ValueError("Features are None. Check data preprocessing!")
-
-            logging.info("Checking for missing values before transformation.")
-            features.fillna(0, inplace=True)  # Replace None/NaN with "0"""
+           
             logging.info("Transforming features.")
             data_scaled = preprocessor.transform(features)
             

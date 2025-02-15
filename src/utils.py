@@ -17,48 +17,30 @@ def save_object(file_path, obj):
     except Exception as e:
         raise CustomException(e, sys)
     
-def evaluate_model(X_train,y_train,X_test,y_test,
-                   model,param):
+def evaluate_model(X_train, y_train, X_test, y_test, models, param):
     try:
-        report={}
-
-        for key, model_instance in model.items():
-            para=param[key]
+        report = {}
+        for model_name, model_instance in models.items():
+            para = param[model_name]
             
-            gs=GridSearchCV(model,para,cv=3,n_jobs=-3)
-            gs.fit(X_train,y_train) ##train model
+            gs = GridSearchCV(model_instance, para, cv=3, n_jobs=-1)
+            gs.fit(X_train, y_train)  # train model
 
-            model_instance=gs.best_estimator_  ##best model
-            model_instance.fit(X_train,y_train)
+            model_instance = gs.best_estimator_  # best model
+            model_instance.fit(X_train, y_train)
 
-            ##prediction
-            y_train_pred = model_instance.predict(X_train)  ##prediction on training set
-            y_test_pred = model_instance.predict(X_test)  ##prediction on test set
+            # prediction
+            y_train_pred = model_instance.predict(X_train)  # prediction on training set
+            y_test_pred = model_instance.predict(X_test)  # prediction on test set
 
-            ##evaluate the model
+            # evaluate the model
             train_model_score = r2_score(y_train, y_train_pred)
             test_model_score = r2_score(y_test, y_test_pred)
 
-            report[key] = test_model_score
+            report[model_name] = test_model_score
         return report
     except Exception as e:
         raise CustomException(e, sys)
-
-"""def evaluate_model(X_train, y_train, X_test, y_test, models, param):
-    report = {}
-    for model_name, model in models.items():
-        logging.info(f"Training {model_name}")
-        if model_name in param:
-            gs = RandomizedSearchCV(model, param[model_name], cv=3, n_jobs=-1, verbose=2)
-            gs.fit(X_train, y_train)
-            model = gs.best_estimator_
-        else:
-            model.fit(X_train, y_train)
-        
-        y_pred = model.predict(X_test)
-        score = r2_score(y_test, y_pred)
-        report[model_name] = score
-    return report"""
 
 def load_object(file_path):
     try:
