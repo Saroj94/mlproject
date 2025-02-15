@@ -1,0 +1,76 @@
+<html>
+    <body>
+        <div class="login">
+            <h1>Student exam test performance</h1>
+            
+            <form action="{{ url_for('predict_datapoint') }}" method="post">
+                <h1>
+                    <legend>Enter the student's test predicted score</legend>
+                </h1>
+                <div class="mb-3">
+                    <label class="form-label">Gender</label>
+                    <select class="form-control" name="gender" aria-placeholder=" Enter your Gender" required>
+                        <option class="placeholder" selected disabled value="">Select your Gender</option>
+                        <option value="male"> Male </option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Race or Ethnicity</label>
+                    <select class="form-control" name="race_ethnicity" aria-placeholder=" Enter your Ethnicity" required>
+                        <option class="placeholder" selected disabled value="">Select your Ethnicity</option>
+                        <option value="group A"> Group A </option>
+                        <option value="group B">Group B</option>
+                        <option value="group C">Group C</option>
+                        <option value="group D">Group D</option>
+                        <option value="group E">Group E</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Parental level of Education</label>
+                    <select class="form-control" name="parental_level_of_education" aria-placeholder=" Enter your Parental Education" required>
+                        <option class="placeholder" selected disabled value="">Select your parental Education</option>
+                        <option value="associate's degree"> Associate's Degree </option>
+                        <option value="bachelor's degree">Bachelor's Degree</option>
+                        <option value="high school">High School</option>
+                        <option value="master's degree">Master's Degree</option>
+                        <option value="some college">Some College</option>
+                        <option value="some high school">Some high school</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Lunch Type</label>
+                    <select class="form-control" name="lunch" aria-placeholder=" Enter your Lunch Type" required>
+                        <option class="placeholder" selected disabled value="">Select your Lunch Type</option>
+                        <option value="free/reduced"> Free/Reduced </option>
+                        <option value="standard">Standard</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Test Preparation course</label>
+                    <select class="form-control" name="test_preparation_course" aria-placeholder=" Enter your course" required>
+                        <option class="placeholder" selected disabled value="">Select Test_course</option>
+                        <option value="none"> None </option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Writing Score out of 100</label>
+                    <input class="form-control" type="number" name="writing_score" 
+                    aria-placeholder=" Enter your Writing score" min="0" max="100" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Reading Score out of 100</label>
+                    <input class="form-control" type="number" name="reading_score" 
+                    aria-placeholder=" Enter your reading score" min="0" max="100" />
+                </div>
+                <div class="mb-3">
+                    <input class="btn btn-primary" type="submit" value="Predict your maths score" required/>
+                </div>
+            </form>
+        </div>
+        <h2> 
+            The predicted score is: {{ results }}
+        </h2>
+    </body>
+</html>
